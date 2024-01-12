@@ -921,13 +921,15 @@ ise.diff <- function(fhat1, fhat2, xmin, xmax)
 
 ##########################################################################
 ## Create transparent colour
-## partial alias for plot3D::alpha.col
+## partial alias for alpha.col
 ##########################################################################
 
 transparency.col <- function(col, alpha)
 { 
     trans.ind <- col!="transparent"
-    col[trans.ind] <- plot3D::alpha.col(col[trans.ind], alpha=alpha)
+    col[trans.ind] <- alpha.col(col[trans.ind], alpha=alpha)
     
     return(col)
 }
+
+alpha.col <- function(col, alpha=0.5) rgb(t(col2rgb(col))/255, alpha=alpha)

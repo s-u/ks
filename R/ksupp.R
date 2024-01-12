@@ -111,9 +111,10 @@ plot.ksupp <- function(x, display="plot3D", ...)
     else if (d==3) 
     {
         disp <- match.arg(display, c("plot3D", "rgl"))
-        if (disp=="plot3D") plot3D::triangle3D(x, ...)
-        else if (disp=="rgl") 
-        {
+        if (disp=="plot3D") {
+            if (!requireNamespace("plot3D", quietly=TRUE)) stop("Install the plot3D package as it is required.", call.=FALSE)
+            plot3D::triangle3D(x, ...)
+        } else if (disp=="rgl") {
             if (!requireNamespace("rgl", quietly=TRUE)) stop("Install the rgl package as it is required.", call.=FALSE)
             rgl::triangles3d(x=x[,1], y=x[,2], z=x[,3], ...)
         }
